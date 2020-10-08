@@ -65,8 +65,8 @@ filenames = sys.argv[1:]
 text = open_and_read_file(filenames)
 
 # Get a Markov chain
-chains = make_chains(text)
-print(chains)
+chains = make_text(make_chains(text))
+
 
 DISCORD_TOKEN = os.environ['DISCORD_TOKEN']
 
@@ -82,7 +82,7 @@ async def on_message(message):
         return
 
     if message.content.startswith('hello'):
-        await message.channel.send(chains)
+        await message.channel.send(make_text(make_chains(text)))
 
 
 client.run(DISCORD_TOKEN)
